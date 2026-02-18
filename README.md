@@ -1,6 +1,6 @@
-# ⚽ Team Performance & Match Outcome Prediction
+# ⚽ Football Performance Analytics Model (FPAM)
 
-📌 Project Overview
+## 📌 Project Overview
 
 This project simulates a real-world sports analytics pipeline designed to:
 
@@ -10,7 +10,7 @@ This project simulates a real-world sports analytics pipeline designed to:
 
 The goal is to replicate how a real data team would design, build, and automate a sports performance model using SQL Server and Python.
 
-### 🎯 Business Problem
+## 🎯 Business Problem
 
 Sports analytics companies, betting platforms, and performance analysts need to answer:
 
@@ -24,7 +24,7 @@ To answer this, we:
 -Build rolling statistics (Last 5 matches)
 -Prepare data for predictive modeling
 
-### 🏗 Project Architecture
+## 🏗 Project Architecture
 
 The project is built in layers, following real industry standards.
 
@@ -45,6 +45,8 @@ Stores match-level data.
 |home_goals|	Goals scored by home team|
 |away_goals|	Goals scored by away team|
 
+<br>
+
 #### 🔹 Phase 2 — Enrichment Layer
 
 **View: vw_matches_enriched**
@@ -64,6 +66,8 @@ CASE
     WHEN away_goals > home_goals THEN 'A'
     ELSE 'D'
 END
+
+<br>
 
 #### 🔹 Phase 3 — Team-Level Transformation (Critical Step)
 
@@ -86,6 +90,8 @@ Points system:
 
 This mirrors how real sports analytics datasets are structured.
 
+<br>
+
 #### 🔹 Phase 4 — Performance Metrics
 
 View: vw_team_matches_stats
@@ -95,6 +101,8 @@ Adds:
 -Goal difference
 -Match-level team performance indicators
 -This prepares the data for advanced feature engineering.
+
+<br>
 
 #### 🔹 Phase 5 — Rolling Performance (Next Step)
 
@@ -111,6 +119,7 @@ Using SQL window functions:
 -SUM() OVER (PARTITION BY ...)
 -ROWS BETWEEN ...
 
+<br>
 
 #### 🔹 Phase 6 — Python Integration (Planned)
 
@@ -127,7 +136,7 @@ Predict probabilities for:
 -Draw
 -Away Win
 
-### 🛠 Technologies Used
+## 🛠 Technologies Used
 
 -SQL Server
 -T-SQL (Views, CASE, UNION ALL, Window Functions)
