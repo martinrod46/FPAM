@@ -6,7 +6,7 @@ This project simulates a real-world sports analytics pipeline designed to:
 
 - Transform raw match data into structured team-level analytics.
 - Engineer performance features (points, goal difference, recent form).
--Prepare data for machine learning prediction (Home Win / Draw / Away Win).
+- Prepare data for machine learning prediction (Home Win / Draw / Away Win).
 
 The goal is to replicate how a real data team would design, build, and automate a sports performance model using SQL Server and Python.
 
@@ -18,11 +18,11 @@ Can we estimate match outcome probabilities based on recent team performance?
 
 To answer this, we:
 
--Structure match data properly
--Convert match-level data into team-level records
--Calculate performance metrics
--Build rolling statistics (Last 5 matches)
--Prepare data for predictive modeling
+- Structure match data properly
+- Convert match-level data into team-level records
+- Calculate performance metrics
+- Build rolling statistics (Last 5 matches)
+- Prepare data for predictive modeling
 
 ## 🏗 Project Architecture
 
@@ -77,16 +77,16 @@ Each match is converted into two team-level records using UNION ALL.
 
 This structure allows us to calculate:
 
--Points per team
--Goals for
--Goals against
--Opponent tracking
+- Points per team
+- Goals for
+- Goals against
+- Opponent tracking
 
 Points system:
 
--Win = 3
--Draw = 1
--Loss = 0
+- Win = 3
+- Draw = 1
+- Loss = 0
 
 This mirrors how real sports analytics datasets are structured.
 
@@ -98,9 +98,9 @@ View: vw_team_matches_stats
 
 Adds:
 
--Goal difference
--Match-level team performance indicators
--This prepares the data for advanced feature engineering.
+- Goal difference
+- Match-level team performance indicators
+- This prepares the data for advanced feature engineering.
 
 <br>
 
@@ -108,16 +108,16 @@ Adds:
 
 We calculate:
 
--Points in last 5 matches
--Goal difference in last 5 matches
--Average goals scored (last 5)
--Average goals conceded (last 5)
+- Points in last 5 matches
+- Goal difference in last 5 matches
+- Average goals scored (last 5)
+- Average goals conceded (last 5)
 
 Using SQL window functions:
 
--ROW_NUMBER()
--SUM() OVER (PARTITION BY ...)
--ROWS BETWEEN ...
+- ROW_NUMBER()
+- SUM() OVER (PARTITION BY ...)
+- ROWS BETWEEN ...
 
 <br>
 
@@ -125,20 +125,20 @@ Using SQL window functions:
 
 Using Python:
 
--Pull real match data from an API
--Insert into SQL Server
--Recompute features automatically
--Train a logistic regression model
+- Pull real match data from an API
+- Insert into SQL Server
+- Recompute features automatically
+- Train a logistic regression model
 
 Predict probabilities for:
 
--Home Win
--Draw
--Away Win
+- Home Win
+- Draw
+- Away Win
 
 ## 🛠 Technologies Used
 
--SQL Server
--T-SQL (Views, CASE, UNION ALL, Window Functions)
--Python (planned phase)
--REST API integration (planned phase)
+- SQL Server
+- T-SQL (Views, CASE, UNION ALL, Window Functions)
+- Python (planned phase)
+- REST API integration (planned phase)
