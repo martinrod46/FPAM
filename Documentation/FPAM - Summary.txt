@@ -1,0 +1,163 @@
+Football Performance Analytics Model -
+
+
+
+// What do we want to accomplish? 
+
+We want a data-driven way to estimate which team has a higher probability of winning an upcoming match, using historical performance.
+
+So the question is: Can we quantify team strength and recent form to estimate match outcome probability?
+
+
+How are we going to estimate those probabilities?? Using this metrics: 
+
+-Recent performance ( WE ARE GOING TO FOCUS ONLY ON THE LAST 5 MATCHES
+-Goals scored vs goals received 
+-Home vs Away performance 
+-Head-to-head history 
+-Win streak momentum
+-League position 
+
+// What is going to be our deliverable??
+
+THE BIG PICTURE : 
+
+For any match: 
+
+Team A vs Team B - > 
+
+-Team A strength score
+-Team B strength score
+-Estimated win probability %
+-Confidence indicator
+
+
+DATA TERMS : 
+
+-Win rate ( 5 LAST GAMES )
+-Avg scored goals ( LAST 5 GAMES )
+-Avg scored conceded ( LAST 5 GAMES )
+-Goal difference rolling AVG ( ? )
+-Points per match
+-Home advantage factor ( ? ) 
+
+Match-Level Context
+-Is team A playing home?
+-Head-to-head win %  ( ? )
+-Current season performance 
+
+
+
+READ ME ->
+
+"The objective of my project was to build a data-driven model that estimates the probability of each team winning an upcoming football match 
+based on historical performance over the last 5 matches, recent form, and contextual match factors."
+
+DATA REQUIREMENTS : 
+
+// 1- RECENT FORM (MOMENTUM)
+-Win rate last 5 matches
+-Goal difference last 5 matches
+-Points per match
+
+Why - Teams in good form win more matches
+
+
+// 2- OFFENSIVE STRENGTH
+-Avg goals scored
+-Shots on target ( IF THE API HAS THAT DATA AVAILABLE ) 
+-Expected goals ( IF THE API HAS THAT DATA AVAILABLE )
+
+Why - Teams that score more win more
+
+// 3- DEFENSIVE STRENGTH
+-Avg goals conceded
+-Clean sheet rate (?)
+
+Why - Strong defense increases win probability 
+
+
+// 4- HOME ADVANTAGE
+-Win rate at home
+-Win rate away 
+
+Why - Home teams statistically win more
+
+// 5- HEAD-TO-HEAD (?)
+-Last 3-5 matches
+-Historical win %
+
+why - Some matchups historically favor one team.
+
+
+
+CORE METRICS! ( LAST 5 MATCHES )
+
+// 1 - RECENT WIN RATE ( RWR ) 
+
+RWR = WINS LAST 5 / 5
+
+
+// 2 - RECENT GOAL DIFFERENCE AVERAGE ( RGD ) 
+
+RGA = AVG(GOALS_SCORED - GOALS_CONCEDED) LAST_5_MATCHES
+
+
+// 3 - RECENT POINTS PER MATCH ( RPM )
+
+Standard football scoring: 
+
+Win = 3
+Draw = 1
+Loss = 0 
+
+RPM = POINTS_LAST_5 / 5
+
+
+// 4 - HOME ADVANTAGE FACTOR ( HAF )
+
+If team is playing at home:
+
+HAF = HOME_WIN_RATE_SEASON - AWAY_WIN_RATE_SEASON 
+
+
+
+Step 1 - Calculate Strength Score For Each Team ( 5 previous matches )
+
+
+OK .. Then : How to calculate the TEAM_STRENGTH ?
+
+TEAM_STRENGTH = (RWR) + (RGD) + (RPM) + (HAF)
+
+Team A Strength = S_A
+Team B Strength = S_B
+
+
+
+Step 2 - Compute Strength Difference
+
+DIFF = S_A - S_B
+
+Diff > 0 → Home stronger
+Diff < 0 → Away stronger
+Diff ≈ 0 → Balanced → Higher draw probability
+
+
+// PROJECT ARCHITECTURE
+
+
+Football API
+     ↓
+Python (Extract)
+     ↓
+SQL Server (Raw)
+     ↓
+SQL (Transform + Rolling Metrics + Strength Score)
+     ↓
+Python (Probability Model)
+     ↓
+prediction table in SQL
+     ↓
+Tableau
+    
+

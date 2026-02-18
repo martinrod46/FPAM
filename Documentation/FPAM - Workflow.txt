@@ -1,0 +1,32 @@
+Football Performance Analytics Model / Workflow -
+
+
+Phase 1 — Local Prototype (SQL Only)
+
+-Create table structure
+-Insert sample data
+-Build transformations
+-Validate logic
+-Build features (rolling 5 matches)
+-This is what we are doing now.
+
+---------------------------------------------------------------------------------------
+
+Phase 2 — Connect API (Python)
+
+-Use requests library
+-Pull JSON
+-Parse JSON
+-Insert into matches table
+-Now the structure already exists.
+
+---------------------------------------------------------------------------------------
+
+Phase 3 — Automation
+
+-Schedule job (cron / Airflow / Windows Task Scheduler)
+-Refresh weekly
+-Recompute features
+-Store predictions
+
+
